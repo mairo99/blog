@@ -8,18 +8,22 @@
 </head>
 <body>
 
-<?php foreach ($posts as $post) : ?>
-<article>
+@foreach ($posts as $post)
+    <article>
 
-    <a href="/posts/<?= $post-> slug; ?>"><h1><?= $post-> title; ?> </h1></a>
+        <a href="/posts/{{$post->slug}}"><h1>
+            {{$post->title}}
 
-    <div>
+        </a>
+        </h1>
 
-        <?= $post -> excerpt ?>
+        <div>
 
-    </div>
+            {{$post->excerpt}}
 
-</article>
-<?php endforeach; ?>
+        </div>
+
+    </article>
+@endforeach
 </body>
 </html>
