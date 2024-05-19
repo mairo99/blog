@@ -4,7 +4,7 @@
 
         <a
 
-            href="#">{{$post->category->name}}
+            href="/categories/{{$post->category->slug}}">{{$post->category->name}}
 
         </a>
         <div>
