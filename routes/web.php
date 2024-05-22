@@ -10,7 +10,9 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 Route::get('/', function () {
 
     return view('posts', [
-        'posts' => Post::latest()->get()
+        'posts' => Post::latest()->get(),
+        'categories'=> Category::all()
+
     ]);
 
 });
@@ -19,14 +21,17 @@ Route::get('posts/{post:slug}', function (Post $post) {
 
 
     return view('post', [
-        'post' => $post
+        'post' => $post,
+        'categories'=> Category::all()
     ]);
 
 });
 
 Route::get('categories/{category:slug}', function (Category $category) {
     return view('posts', [
-        'posts' => $category->posts
+        'posts' => $category->posts,
+        'currentCategory' => $category,
+        'categories'=> Category::all()
     ]);
 
 
@@ -34,7 +39,8 @@ Route::get('categories/{category:slug}', function (Category $category) {
 
 Route::get('authors/{author:username}', function (User $author) {
     return view('posts', [
-        'posts' => $author->posts
+        'posts' => $author->posts,
+        'categories'=> Category::all()
     ]);
 
 
