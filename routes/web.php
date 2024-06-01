@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
+use App\Http\Controllers\RegisterController;
 
 Route::get('/', [PostController::class,'index'])->name('home');
 
@@ -21,3 +22,6 @@ Route::get('authors/{author:username}', function (User $author) {
 
 
 });
+
+Route:: get ('register', [RegisterController::class,'create']);
+Route:: post ('register', [RegisterController::class,'store']);
