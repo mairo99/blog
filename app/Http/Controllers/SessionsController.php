@@ -22,9 +22,10 @@ if (auth()->attempt($attributes)) {
     session()->regenerate();
     return redirect('/')->with('success', 'Welcome Back!');
 }
-return back()
+else { return back()
     ->withInput()
     ->withErrors(['email' => 'Your provided credentials could not be verified.']);
+    }
     }
 
     public function destroy(){
