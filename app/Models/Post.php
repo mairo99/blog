@@ -40,5 +40,10 @@ $query->where('slug', $category)));
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function comments(){
+        return $this->hasMany(Comment::class,'user_id');
+    }
+
+
 
 }
