@@ -21,10 +21,8 @@ Route::post ('newsletter', function () {
         'server' => 'us17'
     ]);
     try {
-        $response = $mailchimp->lists->addListMember('d3c0c95629', [
-            'email_address' => request('email'),
-            'status' => 'subscribed'
-        ]);
+        $newsletter=new \App\Services\Newsletter();
+        $newsletter->subscribe(request('email'));
     } catch (\Exception $e){
 
     }
