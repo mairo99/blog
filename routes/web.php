@@ -12,16 +12,25 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 use App\Http\Controllers\RegisterController;
 
 
-Route:: get ('ping', function () {
+Route::post ('newsletter', function () {
+
+    request () ->validate( ['email' => 'required|email'] );
     $mailchimp = new \MailchimpMarketing\ApiClient();
-    $maiLchimp->setConfig([
+    $mailchimp->setConfig([
         'apikey' => config('services.mailchimp.key'),
         'server' => 'us17'
     ]);
-    $response = $mailchimp->lists->addListMember('d3c0c95629', [
-        'email_address' => 'jeffjordanway@gmail.com',
-        'status' => 'subscribed'
-    ]);
+    try {
+        $response = $mailchimp->lists->addListMember('d3c0c95629', [
+            'email_address' => request('email'),
+            'status' => 'subscribed'
+        ]);
+    } catch (\Exception $e){
+
+    }
+
+    return redirect('/')
+        ->with('success', 'You are now subscribed to our newsletter!');
 });
 
 Route::get('/', [PostController::class,'index'])->name('home');
