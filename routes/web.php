@@ -11,6 +11,19 @@ use Illuminate\Support\Facades\Route;
 use Spatie\YamlFrontMatter\YamlFrontMatter;
 use App\Http\Controllers\RegisterController;
 
+
+Route:: get ('ping', function () {
+    $mailchimp = new \MailchimpMarketing\ApiClient();
+    $maiLchimp->setConfig([
+        'apikey' => config('services.mailchimp.key'),
+        'server' => 'us17'
+    ]);
+    $response = $mailchimp->lists->addListMember('d3c0c95629', [
+        'email_address' => 'jeffjordanway@gmail.com',
+        'status' => 'subscribed'
+    ]);
+});
+
 Route::get('/', [PostController::class,'index'])->name('home');
 
 Route::get('posts/{post:slug}', [PostController::class,'show']);
